@@ -490,6 +490,61 @@
         }
         [data-theme="light"] .search-input::placeholder { color: #a1a1aa; }
         [data-theme="light"] .filter-select option { background: #fff; }
+
+        /* ── Inputs de fecha/mes: ícono del calendario ── */
+        /* Modo oscuro: el ícono nativo es oscuro, lo invertimos a blanco */
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="month"]::-webkit-calendar-picker-indicator,
+        input[type="week"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator,
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) brightness(1.2);
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.15s;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator:hover,
+        input[type="month"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+        /* Modo claro: el ícono nativo ya es oscuro, no invertir */
+        [data-theme="light"] input[type="date"]::-webkit-calendar-picker-indicator,
+        [data-theme="light"] input[type="month"]::-webkit-calendar-picker-indicator,
+        [data-theme="light"] input[type="week"]::-webkit-calendar-picker-indicator,
+        [data-theme="light"] input[type="time"]::-webkit-calendar-picker-indicator,
+        [data-theme="light"] input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: none;
+            opacity: 0.5;
+        }
+        [data-theme="light"] input[type="date"]::-webkit-calendar-picker-indicator:hover,
+        [data-theme="light"] input[type="month"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 0.8;
+        }
+
+        /* color-scheme para que el picker nativo también adapte su UI interna */
+        :root { color-scheme: dark; }
+        [data-theme="light"] :root,
+        [data-theme="light"] { color-scheme: light; }
+
+        /* Texto del input de fecha/mes visible en modo claro */
+        [data-theme="light"] input[type="date"],
+        [data-theme="light"] input[type="month"],
+        [data-theme="light"] input[type="week"],
+        [data-theme="light"] input[type="time"],
+        [data-theme="light"] input[type="datetime-local"] {
+            color: #18181b;
+            color-scheme: light;
+        }
+        /* Modo oscuro: forzar texto claro */
+        input[type="date"],
+        input[type="month"],
+        input[type="week"],
+        input[type="time"],
+        input[type="datetime-local"] {
+            color: #f4f4f5;
+            color-scheme: dark;
+        }
+
         [data-theme="light"] .btn-search {
             background: rgba(0,0,0,0.04);
             border-color: rgba(0,0,0,0.1);
