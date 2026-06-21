@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Beneficiario;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BeneficiarioController extends Controller
 {
@@ -24,6 +25,14 @@ class BeneficiarioController extends Controller
 
         if ($request->filled('estado')) {
             $query->where('estado', $request->estado);
+        }
+
+        if ($request->filled('tipo_periodo') && $request->filled('periodo')) {
+            if ($request->tipo_periodo === 'dia') {
+                $query->whereDate('created_at', $request->periodo);
+            } elseif ($request->tipo_periodo === 'mes') {
+                $query->whereRaw("strftime('%Y-%m', created_at) = ?", [$request->periodo]);
+            }
         }
 
         $beneficiarios = $query->latest()->paginate(15)->withQueryString();
