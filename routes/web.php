@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('asistencia/historial', [AsistenciaController::class, 'historial'])->name('asistencia.historial');
     Route::get('asistencia/personas', [AsistenciaController::class, 'personas'])->name('asistencia.personas');
     Route::get('asistencia/pdf', [AsistenciaController::class, 'pdf'])->name('asistencia.pdf');
+    Route::post('asistencia/visitante', [AsistenciaController::class, 'storeVisitante'])->name('asistencia.visitante.store');
+    Route::delete('asistencia/visitante/{visitante}', [AsistenciaController::class, 'destroyVisitante'])->name('asistencia.visitante.destroy');
 
     // Exportaciones
     Route::get('exportar/beneficiarios', [ExportController::class, 'beneficiarios'])->name('beneficiarios.export');
